@@ -8,11 +8,11 @@ import '../../data/models/user_model.dart';
 import '../repositories/user_repository.dart';
 
 @injectable
-class GetListUser implements Usecase<List<UserModel>, NoParams> {
+class GetListUser implements Usecase<UserModel, NoParams> {
   final UserRepository _repository;
 
   GetListUser(this._repository);
 
   @override
-  Future<Either<Failure, List<UserModel>>> call(NoParams params) => _repository.requestGetListUser();
+  Future<Either<Failure, UserModel>> call(NoParams params) => _repository.requestGetListUser();
 }

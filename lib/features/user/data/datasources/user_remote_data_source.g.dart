@@ -16,20 +16,18 @@ class _UserRemoteDataSourceImpl implements UserRemoteDataSourceImpl {
   String? baseUrl;
 
   @override
-  Future<List<UserModel>> getUsers() async {
+  Future<UserModel> getListUser() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<UserModel>>(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UserModel>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/user',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map((dynamic i) => UserModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = UserModel.fromJson(_result.data!);
     return value;
   }
 

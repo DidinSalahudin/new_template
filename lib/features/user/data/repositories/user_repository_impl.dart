@@ -22,7 +22,7 @@ class UserRepositoryImpl implements UserRepository {
     this.localDataSource,
   );
   @override
-  Future<Either<Failure, List<UserModel>>> requestGetListUser() async {
+  Future<Either<Failure, UserModel>> requestGetListUser() async {
     if (await networkInfo.isConnected) {
       try {
         final users = await remoteDataSource.getListUser();

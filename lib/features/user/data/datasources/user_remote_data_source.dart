@@ -6,15 +6,16 @@ import 'package:retrofit/http.dart';
 part 'user_remote_data_source.g.dart';
 
 abstract class UserRemoteDataSource {
-  Future<List<UserModel>> getListUser();
+  Future<UserModel> getListUser();
 }
 
 @RestApi()
-@injectable
+@Injectable(as: UserRemoteDataSource)
 abstract class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @factoryMethod
   factory UserRemoteDataSourceImpl(Dio dio) = _UserRemoteDataSourceImpl;
 
   @GET('/user')
-  Future<List<UserModel>> getUsers();
+  @override
+  Future<UserModel> getListUser();
 }

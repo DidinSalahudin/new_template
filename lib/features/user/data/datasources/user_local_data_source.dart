@@ -6,9 +6,9 @@ import 'package:new_template/features/user/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class UserLocalDataSource {
-  Future<List<UserModel>> getLastUsers();
+  Future<UserModel> getLastUsers();
 
-  Future<void> cacheUsers(List<UserModel> usersToCache);
+  Future<void> cacheUsers(UserModel usersToCache);
 }
 
 const cachedUsers = 'CACHED_USERS';
@@ -20,28 +20,16 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   UserLocalDataSourceImpl(this.sharedPreferences);
 
   @override
-  Future<void> cacheUsers(List<UserModel> usersToCache) async {
-    final usersString = <String>[];
-
-    for (var user in usersToCache) {
-      usersString.add(json.encode(user.toJson()));
-    }
-
-    await sharedPreferences.setStringList(cachedUsers, usersString);
+  Future<void> cacheUsers(UserModel usersToCache) async {
+    await sharedPreferences.setString(cachedUsers, json.encode(usersToCache.toJson()));
   }
 
   @override
-  Future<List<UserModel>> getLastUsers() async {
-    final cachedUsersString = sharedPreferences.getStringList(cachedUsers);
-
-    final lastCachedUsers = <UserModel>[];
+  Future<UserModel> getLastUsers() async {
+    final cachedUsersString = sharedPreferences.getString(cachedUsers);
 
     if (cachedUsersString != null) {
-      for (var user in cachedUsersString) {
-        lastCachedUsers.add(UserModel.fromJson(json.decode(user)));
-      }
-
-      return lastCachedUsers;
+      return UserModel.fromJson(json.decode(cachedUsersString));
     } else {
       throw CacheException();
     }
