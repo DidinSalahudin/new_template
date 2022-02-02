@@ -184,7 +184,8 @@ class _$UserStateTearOff {
   }
 
   _GetListUserOption getListUserOption(
-      {bool isLoading = false, required Option<UserModel> users}) {
+      {bool isLoading = false,
+      required Option<Either<Failure, UserModel>> users}) {
     return _GetListUserOption(
       isLoading: isLoading,
       users: users,
@@ -200,21 +201,22 @@ mixin _$UserState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isLoading, Option<UserModel> users)
+    required TResult Function(
+            bool isLoading, Option<Either<Failure, UserModel>> users)
         getListUserOption,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoading, Option<UserModel> users)?
+    TResult Function(bool isLoading, Option<Either<Failure, UserModel>> users)?
         getListUserOption,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoading, Option<UserModel> users)?
+    TResult Function(bool isLoading, Option<Either<Failure, UserModel>> users)?
         getListUserOption,
     required TResult orElse(),
   }) =>
@@ -294,7 +296,8 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isLoading, Option<UserModel> users)
+    required TResult Function(
+            bool isLoading, Option<Either<Failure, UserModel>> users)
         getListUserOption,
   }) {
     return initial();
@@ -304,7 +307,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoading, Option<UserModel> users)?
+    TResult Function(bool isLoading, Option<Either<Failure, UserModel>> users)?
         getListUserOption,
   }) {
     return initial?.call();
@@ -314,7 +317,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoading, Option<UserModel> users)?
+    TResult Function(bool isLoading, Option<Either<Failure, UserModel>> users)?
         getListUserOption,
     required TResult orElse(),
   }) {
@@ -365,7 +368,7 @@ abstract class _$GetListUserOptionCopyWith<$Res> {
   factory _$GetListUserOptionCopyWith(
           _GetListUserOption value, $Res Function(_GetListUserOption) then) =
       __$GetListUserOptionCopyWithImpl<$Res>;
-  $Res call({bool isLoading, Option<UserModel> users});
+  $Res call({bool isLoading, Option<Either<Failure, UserModel>> users});
 }
 
 /// @nodoc
@@ -392,7 +395,7 @@ class __$GetListUserOptionCopyWithImpl<$Res>
       users: users == freezed
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
-              as Option<UserModel>,
+              as Option<Either<Failure, UserModel>>,
     ));
   }
 }
@@ -406,7 +409,7 @@ class _$_GetListUserOption implements _GetListUserOption {
   @override
   final bool isLoading;
   @override
-  final Option<UserModel> users;
+  final Option<Either<Failure, UserModel>> users;
 
   @override
   String toString() {
@@ -437,7 +440,8 @@ class _$_GetListUserOption implements _GetListUserOption {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isLoading, Option<UserModel> users)
+    required TResult Function(
+            bool isLoading, Option<Either<Failure, UserModel>> users)
         getListUserOption,
   }) {
     return getListUserOption(isLoading, users);
@@ -447,7 +451,7 @@ class _$_GetListUserOption implements _GetListUserOption {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoading, Option<UserModel> users)?
+    TResult Function(bool isLoading, Option<Either<Failure, UserModel>> users)?
         getListUserOption,
   }) {
     return getListUserOption?.call(isLoading, users);
@@ -457,7 +461,7 @@ class _$_GetListUserOption implements _GetListUserOption {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoading, Option<UserModel> users)?
+    TResult Function(bool isLoading, Option<Either<Failure, UserModel>> users)?
         getListUserOption,
     required TResult orElse(),
   }) {
@@ -501,11 +505,11 @@ class _$_GetListUserOption implements _GetListUserOption {
 
 abstract class _GetListUserOption implements UserState {
   const factory _GetListUserOption(
-      {bool isLoading,
-      required Option<UserModel> users}) = _$_GetListUserOption;
+          {bool isLoading, required Option<Either<Failure, UserModel>> users}) =
+      _$_GetListUserOption;
 
   bool get isLoading;
-  Option<UserModel> get users;
+  Option<Either<Failure, UserModel>> get users;
   @JsonKey(ignore: true)
   _$GetListUserOptionCopyWith<_GetListUserOption> get copyWith =>
       throw _privateConstructorUsedError;

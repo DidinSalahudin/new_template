@@ -13,6 +13,8 @@ part 'user_bloc.freezed.dart';
 
 @injectable
 class UserBloc extends Bloc<UserEvent, UserState> {
+  final GetListUser _getUsecaseListUser;
+
   UserBloc(this._getUsecaseListUser) : super(const UserState.initial()) {
     on<UserEvent>(
       (event, emit) async {
@@ -23,27 +25,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
   }
 
-  final GetListUser _getUsecaseListUser;
-
   Future<dynamic> getListUsers(Emitter<UserState> emit) async {
-    emit(
-      UserState.getListUserOption(
-        isLoading: true,
-        users: none(),
-      ),
-    );
-    final Either<Failure, UserModel> result = await _getUsecaseListUser.call(const NoParams());
-    emit(
-      result.fold(
-        (l) => UserState.getListUserOption(
-          isLoading: true,
-          users: none(),
-        ),
-        (r) => UserState.getListUserOption(
-          isLoading: true,
-          users: optionOf(r),
-        ),
-      ),
-    );
+    emit(UserState.getListUserOption(isLoading: true, users: none()));
+    final result = await _getUsecaseListUser.call(const NoParams());
+    emit(UserState.getListUserOption(isLoading: true, users: some(result)));
   }
 }

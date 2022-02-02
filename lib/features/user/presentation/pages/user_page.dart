@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:new_template/features/user/presentation/bloc/user_bloc.dart';
-import 'package:new_template/injection.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+import '../../../../injection.dart';
+import '../../data/models/user_model.dart';
+import '../bloc/user_bloc.dart';
+import '../widget/failure_widget.dart';
+import '../widget/loading_widget.dart';
+
+class UserPage extends StatefulWidget {
+  const UserPage({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _UserPageState createState() => _UserPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _UserPageState extends State<UserPage> {
   late final UserBloc _userBloc;
 
   @override
@@ -32,47 +35,93 @@ class _LoginPageState extends State<LoginPage> {
               parent: BouncingScrollPhysics(),
             ),
             slivers: [
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return Slidable(
-                      key: const ValueKey(0),
-                      endActionPane: const ActionPane(
-                        motion: ScrollMotion(),
-                        children: [
-                          SlidableAction(
-                            onPressed: null,
-                            backgroundColor: Color(0xFF7BC043),
-                            foregroundColor: Colors.white,
-                            icon: Icons.edit,
-                            label: 'Edit',
-                          ),
-                          SlidableAction(
-                            onPressed: null,
-                            backgroundColor: Color(0xFF0392CF),
-                            foregroundColor: Colors.white,
-                            icon: Icons.delete,
-                            label: 'Hapus',
-                          ),
-                        ],
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                        child: const ListTile(
-                          title: Text('Ms Sarah'),
-                          leading: CircleAvatar(
-                            maxRadius: 30.0,
-                          ),
+              const UserAppBarWidget(),
+              BlocBuilder<UserBloc, UserState>(
+                builder: (context, state) {
+                  return state.maybeMap(
+                    orElse: () => const EmptyContainer(),
+                    getListUserOption: (e) => e.users.fold(
+                      () => const LoadingWidget(),
+                      (a) => a.fold(
+                        (l) => const FailureWidget(),
+                        (r) => ListUserWidget(
+                          userdata: r,
                         ),
                       ),
-                    );
-                  },
-                  childCount: 1000,
-                ),
-              ),
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class UserAppBarWidget extends StatelessWidget {
+  const UserAppBarWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: const [
+          Text("List User"),
+          Icon(Icons.add),
+        ],
+      ),
+    );
+  }
+}
+
+class EmptyContainer extends StatelessWidget {
+  const EmptyContainer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(delegate: SliverChildListDelegate([Container()]));
+  }
+}
+
+class ListUserWidget extends StatelessWidget {
+  const ListUserWidget({
+    Key? key,
+    required this.userdata,
+  }) : super(key: key);
+
+  final UserModel userdata;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int i) {
+          return Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 15,
+            ),
+            child: ListTile(
+              title: Text(userdata.data![i].title.toString()),
+              subtitle: Text(
+                  '${userdata.data![i].firstName.toString()} ${userdata.data![i].lastName.toString()}'),
+              leading: CircleAvatar(
+                maxRadius: 30.0,
+                backgroundImage: NetworkImage(
+                  userdata.data![i].picture.toString(),
+                ),
+              ),
+            ),
+          );
+        },
+        childCount: userdata.data!.length,
       ),
     );
   }
