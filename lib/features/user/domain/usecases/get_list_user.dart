@@ -14,5 +14,5 @@ class GetListUser implements Usecase<UserModel, NoParams> {
   GetListUser(this._repository);
 
   @override
-  Future<Either<Failure, UserModel>> call(NoParams params) => _repository.requestGetListUser();
+  Future<Either<FailureData, UserModel>> call(NoParams params) => _repository.requestGetListUser();
 }

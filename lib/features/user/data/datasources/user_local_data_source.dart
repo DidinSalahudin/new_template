@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
-import 'package:new_template/core/error/exception.dart';
-import 'package:new_template/features/user/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../../core/error/exception.dart';
+import '../models/user_model.dart';
 
 abstract class UserLocalDataSource {
   Future<UserModel> getLastUsers();

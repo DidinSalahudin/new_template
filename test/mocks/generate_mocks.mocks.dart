@@ -166,11 +166,13 @@ class MockUserRepository extends _i1.Mock implements _i9.UserRepository {
   }
 
   @override
-  _i5.Future<_i3.Either<_i10.Failure, _i2.UserModel>> requestGetListUser() =>
-      (super.noSuchMethod(Invocation.method(#requestGetListUser, []),
-          returnValue: Future<_i3.Either<_i10.Failure, _i2.UserModel>>.value(
-              _FakeEither_1<_i10.Failure, _i2.UserModel>())) as _i5
-          .Future<_i3.Either<_i10.Failure, _i2.UserModel>>);
+  _i5.Future<_i3.Either<_i10.FailureData, _i2.UserModel>>
+      requestGetListUser() =>
+          (super.noSuchMethod(Invocation.method(#requestGetListUser, []),
+                  returnValue:
+                      Future<_i3.Either<_i10.FailureData, _i2.UserModel>>.value(
+                          _FakeEither_1<_i10.FailureData, _i2.UserModel>()))
+              as _i5.Future<_i3.Either<_i10.FailureData, _i2.UserModel>>);
 }
 
 /// A class which mocks [Connectivity].
@@ -203,10 +205,11 @@ class MockGetListUser extends _i1.Mock implements _i12.GetListUser {
   }
 
   @override
-  _i5.Future<_i3.Either<_i10.Failure, _i2.UserModel>> call(
+  _i5.Future<_i3.Either<_i10.FailureData, _i2.UserModel>> call(
           _i13.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
-          returnValue: Future<_i3.Either<_i10.Failure, _i2.UserModel>>.value(
-              _FakeEither_1<_i10.Failure, _i2.UserModel>())) as _i5
-          .Future<_i3.Either<_i10.Failure, _i2.UserModel>>);
+              returnValue:
+                  Future<_i3.Either<_i10.FailureData, _i2.UserModel>>.value(
+                      _FakeEither_1<_i10.FailureData, _i2.UserModel>()))
+          as _i5.Future<_i3.Either<_i10.FailureData, _i2.UserModel>>);
 }

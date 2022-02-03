@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../injection.dart';
 import '../../data/models/user_model.dart';
 import '../bloc/user_bloc.dart';
-import '../widget/failure_widget.dart';
-import '../widget/loading_widget.dart';
+import '../widgets/user_widget.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -43,7 +42,9 @@ class _UserPageState extends State<UserPage> {
                     getListUserOption: (e) => e.users.fold(
                       () => const LoadingWidget(),
                       (a) => a.fold(
-                        (l) => const FailureWidget(),
+                        (l) {
+                          return FailureWidget(message: l.message);
+                        },
                         (r) => ListUserWidget(
                           userdata: r,
                         ),
@@ -60,6 +61,7 @@ class _UserPageState extends State<UserPage> {
   }
 }
 
+// AppBar
 class UserAppBarWidget extends StatelessWidget {
   const UserAppBarWidget({
     Key? key,
@@ -79,6 +81,7 @@ class UserAppBarWidget extends StatelessWidget {
   }
 }
 
+// Empty Container
 class EmptyContainer extends StatelessWidget {
   const EmptyContainer({
     Key? key,
@@ -90,6 +93,7 @@ class EmptyContainer extends StatelessWidget {
   }
 }
 
+// List user
 class ListUserWidget extends StatelessWidget {
   const ListUserWidget({
     Key? key,
@@ -110,8 +114,7 @@ class ListUserWidget extends StatelessWidget {
             ),
             child: ListTile(
               title: Text(userdata.data![i].title.toString()),
-              subtitle: Text(
-                  '${userdata.data![i].firstName.toString()} ${userdata.data![i].lastName.toString()}'),
+              subtitle: Text('${userdata.data![i].firstName.toString()} ${userdata.data![i].lastName.toString()}'),
               leading: CircleAvatar(
                 maxRadius: 30.0,
                 backgroundImage: NetworkImage(
