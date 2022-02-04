@@ -37,9 +37,11 @@ dependencies:
   flutter_bloc: ^8.0.1
   flutter_dotenv: ^5.0.2
   flutter_slidable: ^1.2.0
+  font_awesome_flutter: ^9.2.0
   freezed_annotation: ^1.1.0
   get_it: ^7.2.0
   google_fonts: ^2.2.0
+  google_nav_bar: ^5.0.5
   injectable: ^1.5.3
   mockito: ^5.0.17
   retrofit: ^3.0.1

@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "New Template",
       onGenerateRoute: RouterApp.generateRoute,
-      initialRoute: RouterApp.userPageRoute,
+      initialRoute: RouterConst.homePageRoute,
     );
   }
 }
