@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:new_template/core/config/theme.dart';
 
 import 'core/config/env.dart';
 import 'core/config/router.dart';
@@ -22,9 +23,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "New Template",
+      theme: CustomTheme.mainTheme,
+      themeMode: ThemeMode.light,
       onGenerateRoute: RouterApp.generateRoute,
       initialRoute: RouterConst.homePageRoute,
     );

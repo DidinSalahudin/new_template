@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:new_template/features/posts/presentation/pages/post_page.dart';
 import 'package:new_template/features/user/presentation/pages/user_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,12 +13,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Post',
-      style: optionStyle,
-    ),
+    PostPage(),
     UserPage(),
   ];
 
@@ -34,7 +31,8 @@ class _HomePageState extends State<HomePage> {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
             child: GNav(
               rippleColor: Colors.grey[300]!,
               hoverColor: Colors.grey[100]!,
@@ -46,14 +44,15 @@ class _HomePageState extends State<HomePage> {
               tabBackgroundColor: Colors.grey[100]!,
               color: Colors.black,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              tabs: const [
+              tabs: [
                 GButton(
-                  icon: FontAwesomeIcons.home,
-                  text: 'Posts',
-                ),
+                    icon: FontAwesomeIcons.home,
+                    text: 'Posts',
+                    textStyle: Theme.of(context).textTheme.headline3),
                 GButton(
                   icon: FontAwesomeIcons.userAlt,
                   text: 'User',
+                  textStyle: Theme.of(context).textTheme.headline3,
                 ),
               ],
               selectedIndex: _selectedIndex,
