@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "New Template",
-      theme: CustomTheme.mainTheme,
+      theme: CustomTheme.lightTheme,
       themeMode: ThemeMode.light,
       onGenerateRoute: RouterApp.generateRoute,
       initialRoute: RouterConst.homePageRoute,
