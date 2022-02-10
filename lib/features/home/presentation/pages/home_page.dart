@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:new_template/core/config/theme.dart';
+import 'package:new_template/core/config/app_theme.dart';
+import 'package:new_template/core/config/theme/theme.dart';
 import 'package:new_template/features/posts/presentation/pages/post_page.dart';
 import 'package:new_template/features/user/presentation/pages/user_page.dart';
 
@@ -12,7 +13,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   String title = 'BottomNavigationBar';
 
   TabController? _tabController;
@@ -52,7 +54,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -64,7 +67,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   ],
                 ),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(30.0),
@@ -93,18 +97,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     ),
                     tabs: [
                       Tab(
-                        icon: LineIcon(
-                          LineIcons.home,
-                          size: 28,
-                        ),
+                        icon: CustomIcons.home,
                         iconMargin: const EdgeInsets.only(bottom: 0.0),
                         text: 'Post',
                       ),
                       Tab(
-                        icon: LineIcon(
-                          LineIcons.user,
-                          size: 28,
-                        ),
+                        icon: CustomIcons.home,
                         iconMargin: const EdgeInsets.only(bottom: 0.0),
                         text: 'User',
                       ),

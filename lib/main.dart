@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:new_template/core/config/theme.dart';
+import 'package:new_template/core/config/app_theme.dart';
 
 import 'core/config/env.dart';
 import 'core/config/router.dart';
