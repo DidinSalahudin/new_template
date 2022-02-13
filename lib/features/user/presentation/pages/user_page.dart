@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../injection.dart';
 import '../../data/models/user_model.dart';
 import '../bloc/user_bloc.dart';
 import '../widgets/user_widget.dart';
@@ -14,47 +13,35 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  late final UserBloc _userBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _userBloc = getIt<UserBloc>();
-    _userBloc.add(const UserEvent.getListUser());
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<UserBloc>(
-      create: (_) => _userBloc,
-      child: Scaffold(
-        body: SafeArea(
-          child: CustomScrollView(
-            physics: const AlwaysScrollableScrollPhysics(
-              parent: BouncingScrollPhysics(),
-            ),
-            slivers: [
-              const UserAppBarWidget(),
-              BlocBuilder<UserBloc, UserState>(
-                builder: (context, state) {
-                  return state.maybeMap(
-                    orElse: () => const EmptyContainer(),
-                    getListUserOption: (e) => e.users.fold(
-                      () => const LoadingWidget(),
-                      (a) => a.fold(
-                        (l) {
-                          return FailureWidget(message: l.message);
-                        },
-                        (r) => ListUserWidget(
-                          userdata: r,
-                        ),
+    return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics(),
+          ),
+          slivers: [
+            const UserAppBarWidget(),
+            BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                return state.maybeMap(
+                  orElse: () => const EmptyContainer(),
+                  getListUserOption: (e) => e.users.fold(
+                    () => const LoadingWidget(),
+                    (a) => a.fold(
+                      (l) {
+                        return FailureWidget(message: l.message);
+                      },
+                      (r) => ListUserWidget(
+                        userdata: r,
                       ),
                     ),
-                  );
-                },
-              )
-            ],
-          ),
+                  ),
+                );
+              },
+            )
+          ],
         ),
       ),
     );

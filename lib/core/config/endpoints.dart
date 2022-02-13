@@ -7,6 +7,9 @@ class Endpoints {
   // Key App ID
   static const String appId = "61f8963edd17d9cbaa145072";
 
-  // Endpoint User
+  // Endpoint List User
   static const String usersGetList = '/user';
+
+  // Endpoint List Post
+  static const String postsGetList = '/post';
 }
